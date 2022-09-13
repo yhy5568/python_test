@@ -1,10 +1,12 @@
 from pynput.keyboard import Key, Listener, KeyCode
 import win32api
+import webbrowser
 
 MY_HOT_KEYS = [
     {"function1": {Key.ctrl_l, Key.alt_l, KeyCode(char="n")}},
     {"function2": {Key.shift, Key.ctrl_l, KeyCode(char="b")}},
-    {"function3": {Key.alt_l, Key.ctrl_l, KeyCode(char="g")}}
+    {"function3": {Key.alt_l, Key.ctrl_l, KeyCode(char="g")}},
+    {"function4": {Key.alt_l, Key.ctrl_l, KeyCode(char="q")}},
 ]
 
 current_keys = set()
@@ -20,6 +22,14 @@ def function2():
 def function3():
     print("함수3 호출")
     win32api.WinExec("notepad.exe")
+
+def function4():
+    print("함수4 호출")
+    #win32api.WinExec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe")
+    #url = 'http://www.naver.com/맨유'
+    url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=맨유'
+    chrome_path = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
+    webbrowser.get(chrome_path).open(url)
 
 def key_pressed(key):
     print("Pressed {}".format(key))
